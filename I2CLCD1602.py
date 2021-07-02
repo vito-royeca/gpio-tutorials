@@ -27,6 +27,7 @@ def loop():
         #lcd.clear()
         lcd.setCursor(0,0)  # set cursor position
         lcd.message( 'CPU: ' + get_cpu_temp()+'\n' )# display CPU temperature
+        #lcd.message("High")
         lcd.message( get_time_now() )   # display the time
         sleep(1)
         

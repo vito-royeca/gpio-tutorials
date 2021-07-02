@@ -3,10 +3,9 @@ from gpiozero import RGBLED
 from time import sleep
 
 adc = ADCDevice()
-led   = RGBLED(16, 20, 21)  # Define an RGBLED class object
 
 def setup():
-    global adc#, led
+    global adc, led
 
     if (adc.detectI2C(0x48)): #Detect the pcf8591
         adc = PCF8591()
@@ -18,7 +17,7 @@ def setup():
         "Program Exit\n")
         exit(-1)
         
-    #led   = RGBLED(16, 20, 21)  # Define an RGBLED class object
+    led   = RGBLED(16, 20, 21)  # Define an RGBLED class object
         
 def loop():
     currentRedValue     = 0
@@ -47,9 +46,9 @@ def setLEDValues(red, green, blue):
     blueVoltage  = blue / 255.0 * 3.3
 
     # Mapping to PWM duty Cycle
-    redLEDValue   = red/255.0
-    greenLEDValue = green/255.0
-    blueLEDValue  = blue/255.0                             #((blue*100)/255)/100
+    redLEDValue   = 1-red/255.0
+    greenLEDValue = 1-green/255.0
+    blueLEDValue  = 1-blue/255.0                             #((blue*100)/255)/100
     
     print("R ADC: %d, Value: %.2f, Voltage: %.2f" % (red, redLEDValue, redVoltage))
     print("G ADC: %d, Value: %.2f, Voltage: %.2f" % (green, greenLEDValue, greenVoltage))
